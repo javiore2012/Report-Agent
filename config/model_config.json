@@ -1,0 +1,10 @@
+{
+  "model_mode": "mock",
+  "mock_mode": true,
+  "provider": "none",
+  "model_name": "mock-ai-draft-v1",
+  "temperature": 0.0,
+  "max_tokens": 1200,
+  "api_key_env_var": "REPORT_AGENT_API_KEY",
+  "prompt_version": "sprint1-v1"
+}

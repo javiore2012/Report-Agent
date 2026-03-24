@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://report-agent.local/schemas/ai_draft.schema.json",
+  "type": "object",
+  "required": ["schema_version", "report_text", "quality_flags"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "report_text": {
+      "type": "object",
+      "required": [
+        "executive_summary",
+        "technical_progress",
+        "documents_reviewed_summary",
+        "meetings_summary",
+        "risks_issues_actions_summary",
+        "next_steps_summary"
+      ],
+      "properties": {
+        "executive_summary": {"type": "string"},
+        "technical_progress": {"type": "array", "items": {"type": "string"}},
+        "documents_reviewed_summary": {"type": "array", "items": {"type": "string"}},
+        "meetings_summary": {"type": "array", "items": {"type": "string"}},
+        "risks_issues_actions_summary": {
+          "type": "object",
+          "required": ["risks", "issues", "actions"],
+          "properties": {
+            "risks": {"type": "array", "items": {"type": "string"}},
+            "issues": {"type": "array", "items": {"type": "string"}},
+            "actions": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "next_steps_summary": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "quality_flags": {
+      "type": "object",
+      "required": ["contains_uncertainty", "requires_human_review", "unsupported_claims_detected"],
+      "properties": {
+        "contains_uncertainty": {"type": "boolean"},
+        "requires_human_review": {"type": "boolean", "const": true},
+        "unsupported_claims_detected": {"type": "boolean"}
+      }
+    }
+  }
+}
