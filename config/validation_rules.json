@@ -1,30 +1,17 @@
-A. Completitud
-VR-001: project_id es obligatorio.
-VR-002: periodo de reporte obligatorio.
-VR-003: al menos 1 actividad registrada.
-VR-004: cada actividad debe tener title, description, category, hours.
-VR-005: debe existir al menos un next_step.
-VR-006: debe existir al menos un resumen libre o nota base.
-B. Consistencia de horas
-VR-010: horas por actividad > 0.
-VR-011: horas por actividad no pueden exceder un umbral configurable.
-VR-012: suma de horas debe coincidir con total semanal si el formulario lo declara.
-VR-013: no permitir actividades duplicadas con mismo título + fecha + horas sin flag.
-C. Evidencia
-VR-020: si una actividad toca un entregable, debe tener al menos 1 evidence_ref o warning.
-VR-021: si se declara documento revisado, debe existir título.
-VR-022: si se declara reunión, debe existir fecha o periodo.
-VR-023: ninguna afirmación “finalizada/completada/delivered” puede salir a reporte si no hay respaldo suficiente.
-D. Calidad narrativa
-VR-030: no permitir frases vacías tipo “worked on stuff”, “did several tasks”.
-VR-031: detectar verbos débiles sin objeto técnico claro.
-VR-032: evitar lenguaje absoluto sin respaldo: “fully validated”, “complete compliance”, “all issues resolved”.
-VR-033: marcar ambigüedad si la nota no permite inferir deliverable, objetivo o resultado.
-E. Workflow y aprobación
-VR-040: no generar versión final si validation.status = FAIL.
-VR-041: no marcar approved sin reviewer_name y approval_timestamp.
-VR-042: toda modificación manual posterior al draft AI debe quedar registrada.
-F. Seguridad y gobernanza
-VR-050: nunca guardar API keys en el repositorio.
-VR-051: no enviar campos sensibles a AI si están marcados como restringidos.
-VR-052: registrar versión de plantilla, versión del prompt y versión del código.
+{
+  "max_hours_per_activity": 24,
+  "rules": [
+    {"id":"VR-001","group":"completeness","description":"project_id required"},
+    {"id":"VR-002","group":"completeness","description":"reporting period required"},
+    {"id":"VR-003","group":"completeness","description":"at least one activity required"},
+    {"id":"VR-004","group":"completeness","description":"activity title/description/category/hours required"},
+    {"id":"VR-005","group":"completeness","description":"at least one next step required"},
+    {"id":"VR-006","group":"completeness","description":"raw intake should include free text summary or notes"},
+    {"id":"VR-010","group":"consistency","description":"activity hours must be >0 and <= threshold"},
+    {"id":"VR-013","group":"consistency","description":"duplicate activities by title+date+hours should be flagged"},
+    {"id":"VR-020","group":"evidence","description":"deliverable-touched activities should include evidence ref"},
+    {"id":"VR-021","group":"evidence","description":"document reviewed requires title"},
+    {"id":"VR-022","group":"evidence","description":"meeting requires date"},
+    {"id":"VR-040","group":"workflow","description":"rendering blocked on FAIL"}
+  ]
+}

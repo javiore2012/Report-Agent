@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://report-agent.local/schemas/intake.schema.json",
+  "type": "object",
+  "required": ["report_metadata", "structured_input"],
+  "properties": {
+    "report_metadata": {
+      "type": "object",
+      "required": ["project_id", "project_name", "reporting_period", "engineer"],
+      "properties": {
+        "project_id": {"type": "string", "minLength": 1},
+        "project_name": {"type": "string", "minLength": 1},
+        "reporting_period": {
+          "type": "object",
+          "required": ["start_date", "end_date"],
+          "properties": {
+            "start_date": {"type": "string", "format": "date"},
+            "end_date": {"type": "string", "format": "date"},
+            "week_label": {"type": "string"}
+          }
+        },
+        "engineer": {
+          "type": "object",
+          "required": ["engineer_id", "name"],
+          "properties": {
+            "engineer_id": {"type": "string"},
+            "name": {"type": "string"},
+            "discipline": {"type": "string"}
+          }
+        }
+      }
+    },
+    "structured_input": {
+      "type": "object",
+      "required": ["activities", "next_steps"],
+      "properties": {
+        "activities": {"type": "array", "items": {"type": "object"}},
+        "documents_reviewed": {"type": "array", "items": {"type": "object"}},
+        "meetings": {"type": "array", "items": {"type": "object"}},
+        "risks_issues_actions": {"type": "object"},
+        "next_steps": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "raw_intake": {"type": "object"}
+  }
+}

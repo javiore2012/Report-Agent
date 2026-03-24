@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://report-agent.local/schemas/work_packet.schema.json",
+  "type": "object",
+  "required": ["schema_version", "report_metadata", "structured_input", "validation", "workflow"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "report_metadata": {"type": "object"},
+    "raw_intake": {"type": "object"},
+    "structured_input": {"type": "object"},
+    "validation": {
+      "type": "object",
+      "required": ["status", "errors", "warnings"],
+      "properties": {
+        "status": {"type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]},
+        "errors": {"type": "array", "items": {"type": "string"}},
+        "warnings": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "required": ["draft_status", "review_status", "approval_status"],
+      "properties": {
+        "draft_status": {"type": "string"},
+        "review_status": {"type": "string"},
+        "approval_status": {"type": "string", "const": "not_approved"}
+      }
+    }
+  }
+}
